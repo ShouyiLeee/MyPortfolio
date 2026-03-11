@@ -50,7 +50,7 @@ export default function About() {
   const { ref, inView } = useScrollInView();
 
   return (
-    <section id="about" className="section-padding relative">
+    <section id="about" className="section-padding relative overflow-hidden">
       {/* Soft accent */}
       <div
         className="absolute right-0 top-1/3 w-96 h-96 opacity-10 pointer-events-none"
@@ -61,6 +61,15 @@ export default function About() {
       />
 
       <div className="container-inner" ref={ref}>
+        {/* Decorative section number */}
+        <span
+          className="section-number select-none pointer-events-none"
+          style={{ top: "-1rem", right: "-1rem" }}
+          aria-hidden
+        >
+          01
+        </span>
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -68,8 +77,14 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <p className="section-label mb-3">01. About Me</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="section-label">01. About Me</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-[#6366f1]/30 to-transparent" />
+          </div>
+          <h2
+            className="font-display font-bold text-white tracking-tight"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}
+          >
             Turning ideas into{" "}
             <span className="gradient-text">intelligent systems</span>
           </h2>

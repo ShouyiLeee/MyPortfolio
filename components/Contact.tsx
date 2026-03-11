@@ -64,8 +64,8 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="section-padding relative"
-      style={{ background: "rgba(13,13,26,0.4)" }}
+      className="section-padding relative overflow-hidden"
+      style={{ background: "rgba(12,12,26,0.5)" }}
     >
       {/* Accent glow */}
       <div
@@ -78,6 +78,15 @@ export default function Contact() {
       />
 
       <div className="container-inner" ref={ref}>
+        {/* Decorative section number */}
+        <span
+          className="section-number select-none pointer-events-none"
+          style={{ top: "-1rem", right: "-1rem" }}
+          aria-hidden
+        >
+          04
+        </span>
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -85,17 +94,24 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="section-label mb-3">04. Contact</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="flex-1 h-px bg-gradient-to-l from-[#6366f1]/30 to-transparent max-w-[6rem]" />
+            <span className="section-label">04. Contact</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-[#6366f1]/30 to-transparent max-w-[6rem]" />
+          </div>
+          <h2
+            className="font-display font-bold text-white tracking-tight mb-4"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}
+          >
             Let&apos;s{" "}
             <span className="gradient-text">Work Together</span>
           </h2>
-          <p className="text-white/40 max-w-md mx-auto text-sm leading-relaxed">
+          <p className="text-white/35 max-w-md mx-auto text-sm leading-relaxed">
             I&apos;m open to full-time roles, research collaborations, and
             exciting AI projects. Drop me a message!
           </p>
-          <div className="flex items-center justify-center gap-2 mt-4 text-white/30 text-xs">
-            <FiMapPin size={12} />
+          <div className="flex items-center justify-center gap-2 mt-4 text-white/25 text-xs font-mono-code">
+            <FiMapPin size={11} />
             <span>Ho Chi Minh City, Vietnam</span>
           </div>
         </motion.div>

@@ -117,8 +117,8 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="section-padding relative"
-      style={{ background: "rgba(13,13,26,0.4)" }}
+      className="section-padding relative overflow-hidden"
+      style={{ background: "rgba(12,12,26,0.5)" }}
     >
       {/* Accent */}
       <div
@@ -130,6 +130,15 @@ export default function Skills() {
       />
 
       <div className="container-inner" ref={ref}>
+        {/* Decorative section number */}
+        <span
+          className="section-number select-none pointer-events-none"
+          style={{ top: "-1rem", right: "-1rem" }}
+          aria-hidden
+        >
+          02
+        </span>
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -137,12 +146,18 @@ export default function Skills() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <p className="section-label mb-3">02. Skills</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="section-label">02. Skills</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-[#8b5cf6]/30 to-transparent" />
+          </div>
+          <h2
+            className="font-display font-bold text-white tracking-tight"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}
+          >
             Tech{" "}
             <span className="gradient-text">Stack</span>
           </h2>
-          <p className="text-white/40 mt-3 max-w-lg text-sm">
+          <p className="text-white/35 mt-4 max-w-lg text-sm leading-relaxed">
             Tools and technologies I use to build production-grade AI systems.
           </p>
         </motion.div>

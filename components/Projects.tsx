@@ -237,7 +237,7 @@ export default function Projects() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="projects" className="section-padding relative">
+    <section id="projects" className="section-padding relative overflow-hidden">
       {/* Accent */}
       <div
         className="absolute right-0 bottom-0 w-96 h-96 opacity-10 pointer-events-none"
@@ -248,6 +248,15 @@ export default function Projects() {
       />
 
       <div className="container-inner" ref={ref}>
+        {/* Decorative section number */}
+        <span
+          className="section-number select-none pointer-events-none"
+          style={{ top: "-1rem", right: "-1rem" }}
+          aria-hidden
+        >
+          03
+        </span>
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -255,12 +264,18 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <p className="section-label mb-3">03. Projects</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="section-label">03. Projects</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-[#06b6d4]/30 to-transparent" />
+          </div>
+          <h2
+            className="font-display font-bold text-white tracking-tight"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}
+          >
             What I&apos;ve{" "}
             <span className="gradient-text">Built</span>
           </h2>
-          <p className="text-white/40 mt-3 max-w-lg text-sm">
+          <p className="text-white/35 mt-4 max-w-lg text-sm leading-relaxed">
             A selection of AI-powered applications — from healthcare multi-agent
             systems to mobile cooking assistants.
           </p>
