@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FiGithub, FiLinkedin, FiMail, FiArrowDown, FiChevronRight } from "react-icons/fi";
 import SolarSystem from "./SolarSystem";
@@ -49,34 +49,6 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 export default function Hero() {
   const role = useTypewriter(ROLES);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef({ x: -9999, y: -9999 });
-
-  /* Particle canvas */
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animId: number;
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const onMouse = (e: MouseEvent) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY };
-    };
-    window.addEventListener("mousemove", onMouse);
-
-    return () => {
-      window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", onMouse);
-    };
-  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden grid-pattern">

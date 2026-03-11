@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { PresentationControls, Sphere, Stars } from "@react-three/drei";
+import { PresentationControls, Stars } from "@react-three/drei";
 import * as THREE from "three";
 
 // Planet Component
@@ -11,7 +11,7 @@ function Planet({ radius, position, color, speed, emitGlow = false }: any) {
   const orbitRef = useRef<THREE.Group>(null);
 
   // Rotate planet around the sun
-  useFrame((state, delta) => {
+  useFrame((state: any, delta: number) => {
     if (orbitRef.current) {
       orbitRef.current.rotation.y += speed * delta;
     }
