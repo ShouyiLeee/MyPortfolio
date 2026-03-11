@@ -15,13 +15,13 @@ import { FaJava } from "react-icons/fa";
 
 type Skill = {
   name: string;
-  icon: React.ElementType;
+  icon: React.ComponentType<any>;
   color: string;
 };
 
 type Category = {
   label: string;
-  icon: React.ElementType;
+  icon: React.ComponentType<any>;
   color: string;
   skills: Skill[];
 };
