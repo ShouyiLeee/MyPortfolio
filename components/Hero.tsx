@@ -70,23 +70,27 @@ export default function Hero() {
       mouseRef.current = { x: e.clientX, y: e.clientY };
     };
     window.addEventListener("mousemove", onMouse);
-
     type P = {
       x: number; y: number; vx: number; vy: number;
       size: number; opacity: number; color: string;
       twinkleSpeed: number;
+      baseOpacity: number;
     };
-    const COLS = ["#ffffff", "#0096E0", "#ffcc00", "#4db8ff", "#ffffff"];
-    const pts: P[] = Array.from({ length: 120 }, () => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      vx: (Math.random() - 0.5) * 0.15,
-      vy: (Math.random() - 0.5) * 0.15,
-      size: Math.random() * 1.8 + 0.2,
-      opacity: Math.random() * 0.6 + 0.2,
-      color: COLS[Math.floor(Math.random() * COLS.length)],
-      twinkleSpeed: Math.random() * 0.02 + 0.005,
-    }));
+    const COLS = ["#ffffff", "#0096E0", "#ffcc00", "#4db8ff", "#e0f2fe", "#ffffff", "#ffffff"];
+    const pts: P[] = Array.from({ length: 250 }, () => {
+      const isStar = Math.random() > 0.4;
+      return {
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        vx: (Math.random() - 0.5) * (isStar ? 0.05 : 0.2), // Stars move very slowly
+        vy: (Math.random() - 0.5) * (isStar ? 0.05 : 0.2),
+        size: isStar ? Math.random() * 1.5 + 0.1 : Math.random() * 2.2 + 0.5,
+        baseOpacity: Math.random() * 0.7 + 0.1,
+        opacity: Math.random() * 0.7 + 0.1,
+        color: COLS[Math.floor(Math.random() * COLS.length)],
+        twinkleSpeed: isStar ? Math.random() * 0.05 + 0.01 : 0, // Faster twinkle for stars
+      };
+    });
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -106,29 +110,44 @@ export default function Hero() {
         const speed = Math.hypot(a.vx, a.vy);
         if (speed > 1.5) { a.vx *= 0.95; a.vy *= 0.95; }
 
-        /* Connections */
-        pts.slice(i + 1).forEach((b) => {
-          const d = Math.hypot(a.x - b.x, a.y - b.y);
-          if (d < 130) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(0,150,224,${0.07 * (1 - d / 130)})`;
-            ctx.lineWidth = 0.4;
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
+        /* Connections (Constellations) */
+        if (!a.twinkleSpeed) { // Only draw lines between moving dots, not background stars
+          pts.slice(i + 1).forEach((b) => {
+            if (b.twinkleSpeed) return;
+            const d = Math.hypot(a.x - b.x, a.y - b.y);
+            if (d < 100) {
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(0,150,224,${0.08 * (1 - d / 100)})`;
+              ctx.lineWidth = 0.5;
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
+          });
+        }
+
+        // Twinkle effect for stars
+        if (a.twinkleSpeed) {
+          a.opacity += a.twinkleSpeed;
+          if (a.opacity >= Math.min(1, a.baseOpacity + 0.4) || a.opacity <= Math.max(0, a.baseOpacity - 0.4)) {
+            a.twinkleSpeed *= -1;
           }
-        });
+        }
 
-        // Twinkle effect
-        a.opacity += a.twinkleSpeed;
-        if (a.opacity > 0.9 || a.opacity < 0.2) a.twinkleSpeed *= -1;
-
-        /* Dot */
+        /* Dot with Glow */
         ctx.beginPath();
         ctx.arc(a.x, a.y, a.size, 0, Math.PI * 2);
-        ctx.fillStyle =
-          a.color + Math.round(a.opacity * 255).toString(16).padStart(2, "0");
+        const alpha = Math.max(0, Math.min(1, a.opacity)).toFixed(2);
+        ctx.fillStyle = a.color === "#ffffff" ? `rgba(255, 255, 255, ${alpha})` : 
+                        a.color === "#0096E0" ? `rgba(0, 150, 224, ${alpha})` :
+                        a.color === "#ffcc00" ? `rgba(255, 204, 0, ${alpha})` :
+                        a.color === "#4db8ff" ? `rgba(77, 184, 255, ${alpha})` :
+                        `rgba(224, 242, 254, ${alpha})`;
+        
+        ctx.shadowBlur = a.twinkleSpeed ? 8 : 4; // Glow effect
+        ctx.shadowColor = a.color;
         ctx.fill();
+        ctx.shadowBlur = 0; // Reset shadow for next draws
 
         a.x += a.vx;
         a.y += a.vy;
@@ -225,11 +244,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.22, ease: EASE }}
-          className="font-display font-black leading-[0.92] tracking-tight mb-7"
-          style={{ fontSize: "clamp(3.4rem, 11vw, 7.5rem)" }}
+          className="font-display font-black leading-[1.1] tracking-tight mb-7 flex flex-wrap justify-center items-center gap-x-4"
+          style={{ fontSize: "clamp(3.4rem, 10vw, 6.5rem)" }}
         >
-          <span className="block font-mono-code font-bold tracking-tighter text-white/90">DT -</span>
-          <span className="block shimmer-text">Le Truong</span>
+          <span className="font-mono-code font-bold tracking-tighter text-white/90">DT</span>
+          <span className="shimmer-text">Le Truong</span>
         </motion.h1>
 
         {/* Typewriter role */}
@@ -254,7 +273,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.52, ease: EASE }}
-          className="text-base md:text-lg text-white/40 max-w-lg mx-auto leading-relaxed mb-11 font-light"
+          className="text-base md:text-lg text-white/50 max-w-lg mx-auto leading-relaxed mb-11 font-light"
         >
           Building intelligent systems that bridge AI research and real-world
           impact. Passionate about Multi-Agent AI, LLMs, and scalable backend
