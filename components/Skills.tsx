@@ -98,14 +98,14 @@ const categories: Category[] = [
 ];
 
 const specialisms = [
-  { label: "RAG Pipelines", color: "#6366f1" },
-  { label: "Multi-Agent Systems", color: "#8b5cf6" },
+  { label: "RAG Pipelines", color: "#0096E0" },
+  { label: "Multi-Agent Systems", color: "#ffcc00" },
   { label: "LLM Integration", color: "#06b6d4" },
   { label: "Computer Vision", color: "#f59e0b" },
   { label: "REST API Design", color: "#10b981" },
   { label: "Vector Databases", color: "#ef4444" },
-  { label: "LangGraph", color: "#6366f1" },
-  { label: "Qdrant", color: "#8b5cf6" },
+  { label: "LangGraph", color: "#0096E0" },
+  { label: "Qdrant", color: "#ffcc00" },
   { label: "Gemini Flash", color: "#4285F4" },
   { label: "Mobile AI", color: "#06b6d4" },
 ];
@@ -124,38 +124,35 @@ export default function Skills() {
       <div
         className="absolute left-0 top-1/2 w-80 h-80 opacity-10 pointer-events-none"
         style={{
-          background: "radial-gradient(circle, #8b5cf6 0%, transparent 70%)",
+          background: "radial-gradient(circle, #06b6d4 0%, transparent 70%)",
           filter: "blur(80px)",
         }}
       />
 
       <div className="container-inner" ref={ref}>
-        {/* Decorative section number */}
-        <span
-          className="section-number select-none pointer-events-none"
-          style={{ top: "-1rem", right: "-1rem" }}
-          aria-hidden
-        >
-          02
-        </span>
-
-        {/* Header */}
+        {/* Decorative Terminal Header to replace buggy large numbers */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <span className="section-label">02. Skills</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-[#8b5cf6]/30 to-transparent" />
+          <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 rounded-lg glass border border-[#06b6d4]/20 shadow-lg shadow-[#06b6d4]/5">
+            <span className="w-3 h-3 rounded-full bg-[#ef4444]" />
+            <span className="w-3 h-3 rounded-full bg-[#f59e0b]" />
+            <span className="w-3 h-3 rounded-full bg-[#10b981]" />
+            <span className="ml-2 font-mono-code text-sm text-[#06b6d4] flex items-center gap-2">
+              <span className="text-white/30">~/portfolio</span> $ cat skills.json
+            </span>
           </div>
           <h2
-            className="font-display font-bold text-white tracking-tight"
+            className="font-display font-bold text-white tracking-tight flex flex-col gap-2"
             style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}
           >
-            Tech{" "}
-            <span className="gradient-text">Stack</span>
+            <span className="font-mono-code text-[#ffcc00] text-2xl md:text-4xl mb-2">&gt; grep "Tech"</span>
+            <span>
+              Tech <span className="gradient-text">Stack</span>
+            </span>
           </h2>
           <p className="text-white/35 mt-4 max-w-lg text-sm leading-relaxed">
             Tools and technologies I use to build production-grade AI systems.
@@ -194,7 +191,7 @@ export default function Skills() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, delay: 0.1 + catIdx * 0.07 }}
-                className="glass-card rounded-2xl p-5 hover:border-[#6366f1]/20 transition-all"
+                className="glass-card rounded-2xl p-5 hover:border-[#0096E0]/20 transition-all"
               >
                 {/* Category header */}
                 <div className="flex items-center gap-2.5 mb-5">

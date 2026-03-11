@@ -74,16 +74,18 @@ export default function Hero() {
     type P = {
       x: number; y: number; vx: number; vy: number;
       size: number; opacity: number; color: string;
+      twinkleSpeed: number;
     };
-    const COLS = ["#6366f1", "#818cf8", "#a78bfa", "#67e8f9"];
-    const pts: P[] = Array.from({ length: 60 }, () => ({
+    const COLS = ["#ffffff", "#0096E0", "#ffcc00", "#4db8ff", "#ffffff"];
+    const pts: P[] = Array.from({ length: 120 }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-      size: Math.random() * 2.2 + 0.4,
-      opacity: Math.random() * 0.45 + 0.08,
+      vx: (Math.random() - 0.5) * 0.15,
+      vy: (Math.random() - 0.5) * 0.15,
+      size: Math.random() * 1.8 + 0.2,
+      opacity: Math.random() * 0.6 + 0.2,
       color: COLS[Math.floor(Math.random() * COLS.length)],
+      twinkleSpeed: Math.random() * 0.02 + 0.005,
     }));
 
     const draw = () => {
@@ -109,13 +111,17 @@ export default function Hero() {
           const d = Math.hypot(a.x - b.x, a.y - b.y);
           if (d < 130) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(99,102,241,${0.07 * (1 - d / 130)})`;
-            ctx.lineWidth = 0.6;
+            ctx.strokeStyle = `rgba(0,150,224,${0.07 * (1 - d / 130)})`;
+            ctx.lineWidth = 0.4;
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
             ctx.stroke();
           }
         });
+
+        // Twinkle effect
+        a.opacity += a.twinkleSpeed;
+        if (a.opacity > 0.9 || a.opacity < 0.2) a.twinkleSpeed *= -1;
 
         /* Dot */
         ctx.beginPath();
@@ -155,7 +161,7 @@ export default function Hero() {
           className="orb-1 absolute w-[600px] h-[600px] rounded-full"
           style={{
             top: "5%", right: "5%",
-            background: "radial-gradient(circle,rgba(99,102,241,.28) 0%,transparent 70%)",
+            background: "radial-gradient(circle,rgba(0,150,224,.25) 0%,transparent 70%)",
             filter: "blur(80px)",
           }}
         />
@@ -163,7 +169,7 @@ export default function Hero() {
           className="orb-2 absolute w-[700px] h-[700px] rounded-full"
           style={{
             bottom: "-10%", left: "-15%",
-            background: "radial-gradient(circle,rgba(139,92,246,.22) 0%,transparent 70%)",
+            background: "radial-gradient(circle,rgba(255,204,0,.15) 0%,transparent 70%)",
             filter: "blur(100px)",
           }}
         />
@@ -171,7 +177,7 @@ export default function Hero() {
           className="orb-3 absolute w-[400px] h-[400px] rounded-full"
           style={{
             top: "55%", left: "45%",
-            background: "radial-gradient(circle,rgba(6,182,212,.18) 0%,transparent 70%)",
+            background: "radial-gradient(circle,rgba(6,182,212,.20) 0%,transparent 70%)",
             filter: "blur(60px)",
           }}
         />
@@ -211,10 +217,10 @@ export default function Hero() {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-[#10b981]" />
           </span>
           Available for opportunities
-          <FiChevronRight size={11} className="text-[#6366f1]" />
+          <FiChevronRight size={11} className="text-[#0096E0]" />
         </motion.div>
 
-        {/* Name — Syne display font */}
+        {/* Name — Space Grotesk display font */}
         <motion.h1
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
@@ -222,8 +228,8 @@ export default function Hero() {
           className="font-display font-black leading-[0.92] tracking-tight mb-7"
           style={{ fontSize: "clamp(3.4rem, 11vw, 7.5rem)" }}
         >
-          <span className="block text-white/90">Lê Trọng</span>
-          <span className="block shimmer-text">Đại Trường</span>
+          <span className="block font-mono-code font-bold tracking-tighter text-white/90">DT -</span>
+          <span className="block shimmer-text">Le Truong</span>
         </motion.h1>
 
         {/* Typewriter role */}
@@ -235,10 +241,10 @@ export default function Hero() {
         >
           <span className="font-mono-code text-sm text-white/30">&lt;</span>
           <span
-            className="font-mono-code text-lg md:text-xl font-medium text-[#a78bfa] min-w-[220px] md:min-w-[300px] text-left inline-block"
+            className="font-mono-code text-lg md:text-xl font-medium text-[#0096E0] min-w-[220px] md:min-w-[300px] text-left inline-block"
           >
             {role}
-            <span className="cursor-blink text-[#6366f1] ml-0.5">|</span>
+            <span className="cursor-blink text-[#ffcc00] ml-0.5">_</span>
           </span>
           <span className="font-mono-code text-sm text-white/30">/&gt;</span>
         </motion.div>
@@ -268,10 +274,10 @@ export default function Hero() {
             }
             className="group relative px-8 py-3.5 rounded-xl font-semibold text-white overflow-hidden"
             style={{
-              background: "linear-gradient(135deg,#6366f1,#8b5cf6)",
-              boxShadow: "0 0 35px rgba(99,102,241,.5), 0 4px 20px rgba(0,0,0,.4)",
+              background: "linear-gradient(135deg,#0096E0,#ffcc00)",
+              boxShadow: "0 0 35px rgba(0,150,224,.5), 0 4px 20px rgba(0,0,0,.4)",
             }}
-            whileHover={{ scale: 1.04, boxShadow: "0 0 50px rgba(99,102,241,.65), 0 8px 30px rgba(0,0,0,.5)" }}
+            whileHover={{ scale: 1.04, boxShadow: "0 0 50px rgba(0,150,224,.65), 0 8px 30px rgba(0,0,0,.5)" }}
             whileTap={{ scale: 0.97 }}
           >
             <span className="relative z-10 flex items-center gap-2">
@@ -287,7 +293,7 @@ export default function Hero() {
             href="https://github.com/ShouyiLeee"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-3.5 rounded-xl font-semibold text-white/75 hover:text-white glass border border-white/10 hover:border-[#6366f1]/40 transition-all flex items-center gap-2"
+            className="px-8 py-3.5 rounded-xl font-semibold text-white/75 hover:text-white glass border border-white/10 hover:border-[#0096E0]/50 transition-all flex items-center gap-2"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
           >
@@ -314,7 +320,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="w-10 h-10 rounded-xl glass border border-white/08 flex items-center justify-center text-white/40 hover:text-white hover:border-[#6366f1]/40 transition-all"
+              className="w-10 h-10 rounded-xl glass border border-white/08 flex items-center justify-center text-white/40 hover:text-white hover:border-[#0096E0]/50 transition-all"
               whileHover={{ scale: 1.12, y: -2 }}
               whileTap={{ scale: 0.92 }}
             >

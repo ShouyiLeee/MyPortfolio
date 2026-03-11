@@ -242,38 +242,35 @@ export default function Projects() {
       <div
         className="absolute right-0 bottom-0 w-96 h-96 opacity-10 pointer-events-none"
         style={{
-          background: "radial-gradient(circle, #06b6d4 0%, transparent 70%)",
+          background: "radial-gradient(circle, #ffcc00 0%, transparent 70%)",
           filter: "blur(80px)",
         }}
       />
 
       <div className="container-inner" ref={ref}>
-        {/* Decorative section number */}
-        <span
-          className="section-number select-none pointer-events-none"
-          style={{ top: "-1rem", right: "-1rem" }}
-          aria-hidden
-        >
-          03
-        </span>
-
-        {/* Header */}
+        {/* Decorative Terminal Header to replace buggy large numbers */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <span className="section-label">03. Projects</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-[#06b6d4]/30 to-transparent" />
+          <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 rounded-lg glass border border-[#ffcc00]/20 shadow-lg shadow-[#ffcc00]/5">
+            <span className="w-3 h-3 rounded-full bg-[#ef4444]" />
+            <span className="w-3 h-3 rounded-full bg-[#f59e0b]" />
+            <span className="w-3 h-3 rounded-full bg-[#10b981]" />
+            <span className="ml-2 font-mono-code text-sm text-[#ffcc00] flex items-center gap-2">
+              <span className="text-white/30">~/portfolio</span> $ ls -al ./projects
+            </span>
           </div>
           <h2
-            className="font-display font-bold text-white tracking-tight"
+            className="font-display font-bold text-white tracking-tight flex flex-col gap-2"
             style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}
           >
-            What I&apos;ve{" "}
-            <span className="gradient-text">Built</span>
+            <span className="font-mono-code text-[#0096E0] text-2xl md:text-4xl mb-2">&gt; view_recent</span>
+            <span>
+              What I&apos;ve <span className="gradient-text">Built</span>
+            </span>
           </h2>
           <p className="text-white/35 mt-4 max-w-lg text-sm leading-relaxed">
             A selection of AI-powered applications — from healthcare multi-agent
@@ -304,7 +301,7 @@ export default function Projects() {
             href="https://github.com/ShouyiLeee?tab=repositories"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass border border-white/10 hover:border-[#6366f1]/40 text-white/60 hover:text-white text-sm font-medium transition-all group"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass border border-white/10 hover:border-[#0096E0]/40 text-white/60 hover:text-white text-sm font-medium transition-all group"
           >
             <FiGithub size={15} />
             View all 41 repositories on GitHub

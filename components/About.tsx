@@ -55,38 +55,35 @@ export default function About() {
       <div
         className="absolute right-0 top-1/3 w-96 h-96 opacity-10 pointer-events-none"
         style={{
-          background: "radial-gradient(circle, #6366f1 0%, transparent 70%)",
+          background: "radial-gradient(circle, #0096E0 0%, transparent 70%)",
           filter: "blur(80px)",
         }}
       />
 
       <div className="container-inner" ref={ref}>
-        {/* Decorative section number */}
-        <span
-          className="section-number select-none pointer-events-none"
-          style={{ top: "-1rem", right: "-1rem" }}
-          aria-hidden
-        >
-          01
-        </span>
-
-        {/* Header */}
+        {/* Decorative Terminal Header to replace buggy large numbers */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <span className="section-label">01. About Me</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-[#6366f1]/30 to-transparent" />
+          <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 rounded-lg glass border border-[#0096E0]/20 shadow-lg shadow-[#0096E0]/5">
+            <span className="w-3 h-3 rounded-full bg-[#ef4444]" />
+            <span className="w-3 h-3 rounded-full bg-[#f59e0b]" />
+            <span className="w-3 h-3 rounded-full bg-[#10b981]" />
+            <span className="ml-2 font-mono-code text-sm text-[#0096E0] flex items-center gap-2">
+              <span className="text-white/30">~/portfolio</span> $ ./about.sh
+            </span>
           </div>
           <h2
-            className="font-display font-bold text-white tracking-tight"
+            className="font-display font-bold text-white tracking-tight flex flex-col gap-2"
             style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}
           >
-            Turning ideas into{" "}
-            <span className="gradient-text">intelligent systems</span>
+            <span className="font-mono-code text-[#ffcc00] text-2xl md:text-4xl mb-2">&gt; whoami</span>
+            <span>
+              Turning ideas into <span className="gradient-text">intelligent systems</span>
+            </span>
           </h2>
         </motion.div>
 
@@ -101,7 +98,7 @@ export default function About() {
               <p>
                 I&apos;m{" "}
                 <span className="text-white font-semibold">DT</span> — an IT student at{" "}
-                <span className="text-[#818cf8] font-medium">
+                <span className="text-[#0096E0] font-medium">
                   University of Information Technology (UIT), Vietnam
                 </span>
                 , passionate about building AI systems that genuinely solve hard problems.
@@ -114,10 +111,13 @@ export default function About() {
                 complete products — from designing RAG pipelines to building Flutter mobile
                 apps backed by FastAPI AI services.
               </p>
-              <p>
-                When I&apos;m not writing code, you&apos;ll find me on the basketball
-                court. The same principles apply — teamwork, strategy, and execution. 🏀
-              </p>
+              <div className="p-5 mt-6 glass-card rounded-xl border-l-4 border-[#ffcc00] flex gap-5 items-center relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#ffcc00]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="text-4xl group-hover:-translate-y-2 group-hover:rotate-12 transition-transform duration-300">🏀</div>
+                <p className="text-white/80 italic text-sm m-0 relative z-10 leading-relaxed">
+                  &quot;When I&apos;m not writing code, you&apos;ll find me on the basketball court. The same principles apply — teamwork, strategy, and execution.&quot;
+                </p>
+              </div>
 
               {/* UIT Badge */}
               <div className="inline-flex items-center gap-3 px-4 py-3 rounded-xl glass border border-white/[0.08] mt-2">
@@ -169,7 +169,7 @@ export default function About() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={inView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.25 + i * 0.08 }}
-                  className="glass-card rounded-2xl p-6 text-center hover:border-[#6366f1]/30 transition-all group"
+                  className="glass-card rounded-2xl p-6 text-center hover:border-[#0096E0]/40 transition-all group"
                 >
                   <div
                     className="w-10 h-10 rounded-xl mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform"
@@ -203,17 +203,17 @@ export default function About() {
                   {
                     year: "2025–Now",
                     label: "Multi-Agent AI Systems",
-                    color: "#6366f1",
+                    color: "#0096E0",
                   },
                   {
                     year: "2024",
                     label: "LLM & RAG Pipeline Engineering",
-                    color: "#8b5cf6",
+                    color: "#4db8ff",
                   },
                   {
                     year: "2023",
                     label: "Computer Vision & Deep Learning",
-                    color: "#06b6d4",
+                    color: "#ffcc00",
                   },
                   {
                     year: "2022",

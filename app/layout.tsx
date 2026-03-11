@@ -1,32 +1,32 @@
 import type { Metadata } from "next";
-import { Syne, Outfit, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const syne = Syne({
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-syne",
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-space",
   display: "swap",
 });
 
-const outfit = Outfit({
-  subsets: ["latin"],
+const inter = Inter({
+  subsets: ["latin", "vietnamese"],
   weight: ["300", "400", "500", "600"],
-  variable: "--font-outfit",
+  variable: "--font-inter",
   display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
+  subsets: ["latin", "vietnamese"],
   weight: ["400", "500", "600"],
   variable: "--font-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Lê Trọng Đại Trường | AI Engineer",
+  title: "DT - Le Truong | AI Engineer",
   description:
-    "Portfolio of Lê Trọng Đại Trường — AI Engineer specializing in Machine Learning, Multi-Agent Systems, and Backend AI development. Building intelligent applications from Vietnam.",
+    "Portfolio of DT - Le Truong — AI Engineer specializing in Machine Learning, Multi-Agent Systems, and Backend AI development. Building intelligent applications from Vietnam.",
   keywords: [
     "AI Engineer",
     "Machine Learning",
@@ -36,16 +36,17 @@ export const metadata: Metadata = {
     "Flutter",
     "Vietnam",
     "Portfolio",
+    "DT Le Truong",
   ],
-  authors: [{ name: "Lê Trọng Đại Trường", url: "https://github.com/ShouyiLeee" }],
-  creator: "Lê Trọng Đại Trường",
+  authors: [{ name: "DT - Le Truong", url: "https://github.com/ShouyiLeee" }],
+  creator: "DT - Le Truong",
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "Lê Trọng Đại Trường | AI Engineer",
+    title: "DT - Le Truong | AI Engineer",
     description:
       "AI Engineer specializing in Machine Learning, Multi-Agent Systems, and Backend AI development.",
-    siteName: "DT Le Portfolio",
+    siteName: "DT - Le Truong Portfolio",
   },
   robots: {
     index: true,
@@ -61,7 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${syne.variable} ${outfit.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
         {children}
       </body>

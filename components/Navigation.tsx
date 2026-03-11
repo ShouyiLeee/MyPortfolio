@@ -60,11 +60,11 @@ export default function Navigation() {
             className="flex items-center gap-2.5 group"
             whileHover={{ scale: 1.03 }}
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center shadow-lg shadow-indigo-500/30">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0096E0] to-[#4db8ff] flex items-center justify-center shadow-lg shadow-[#0096E0]/30">
               <FiCode className="text-white w-4 h-4" />
             </div>
             <span className="font-display font-bold text-white/90 text-base tracking-tight group-hover:text-white transition-colors">
-              DT<span className="text-[#818cf8]">.</span>
+              DT<span className="text-[#ffcc00]">_</span>
             </span>
           </motion.a>
 
@@ -99,10 +99,10 @@ export default function Navigation() {
               href="mailto:22521576@gm.uit.edu.vn"
               className="ml-2 px-4 py-2 text-sm font-semibold rounded-lg text-white transition-all"
               style={{
-                background: "linear-gradient(135deg,#6366f1,#8b5cf6)",
-                boxShadow: "0 0 20px rgba(99,102,241,.35)",
+                background: "linear-gradient(135deg,#0096E0,#ffcc00)",
+                boxShadow: "0 0 20px rgba(0,150,224,.35)",
               }}
-              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(99,102,241,.55)" }}
+              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0,150,224,.55)" }}
               whileTap={{ scale: 0.97 }}
             >
               Hire Me
@@ -142,7 +142,7 @@ export default function Navigation() {
               ))}
               <a
                 href="mailto:22521576@gm.uit.edu.vn"
-                className="mt-2 px-4 py-3 text-sm font-semibold rounded-lg bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white text-center"
+                className="mt-2 px-4 py-3 text-sm font-semibold rounded-lg bg-gradient-to-r from-[#0096E0] to-[#ffcc00] text-white text-center shadow-lg shadow-[#0096E0]/20"
                 onClick={() => setMobileOpen(false)}
               >
                 Hire Me

@@ -72,41 +72,37 @@ export default function Contact() {
         className="absolute left-1/2 top-0 -translate-x-1/2 w-full max-w-2xl h-64 opacity-10 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse, #6366f1 0%, transparent 70%)",
+            "radial-gradient(ellipse, #0096E0 0%, transparent 70%)",
           filter: "blur(60px)",
         }}
       />
 
       <div className="container-inner" ref={ref}>
-        {/* Decorative section number */}
-        <span
-          className="section-number select-none pointer-events-none"
-          style={{ top: "-1rem", right: "-1rem" }}
-          aria-hidden
-        >
-          04
-        </span>
-
-        {/* Header */}
+        {/* Decorative Terminal Header to replace buggy large numbers */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 flex flex-col items-center"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="flex-1 h-px bg-gradient-to-l from-[#6366f1]/30 to-transparent max-w-[6rem]" />
-            <span className="section-label">04. Contact</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-[#6366f1]/30 to-transparent max-w-[6rem]" />
+          <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 rounded-lg glass border border-[#0096E0]/20 shadow-lg shadow-[#0096E0]/5">
+            <span className="w-3 h-3 rounded-full bg-[#ef4444]" />
+            <span className="w-3 h-3 rounded-full bg-[#f59e0b]" />
+            <span className="w-3 h-3 rounded-full bg-[#10b981]" />
+            <span className="ml-2 font-mono-code text-sm text-[#0096E0] flex items-center gap-2">
+              <span className="text-white/30">~/portfolio</span> $ ./send_message.sh
+            </span>
           </div>
           <h2
-            className="font-display font-bold text-white tracking-tight mb-4"
+            className="font-display font-bold text-white tracking-tight flex flex-col gap-2 items-center"
             style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}
           >
-            Let&apos;s{" "}
-            <span className="gradient-text">Work Together</span>
+            <span className="font-mono-code text-[#ffcc00] text-2xl md:text-4xl mb-2">&gt; ping --ping</span>
+            <span>
+              Let&apos;s <span className="gradient-text">Work Together</span>
+            </span>
           </h2>
-          <p className="text-white/35 max-w-md mx-auto text-sm leading-relaxed">
+          <p className="text-white/35 mt-4 max-w-md mx-auto text-sm leading-relaxed">
             I&apos;m open to full-time roles, research collaborations, and
             exciting AI projects. Drop me a message!
           </p>
@@ -204,8 +200,8 @@ export default function Contact() {
                         border: "1px solid rgba(255,255,255,0.08)",
                       }}
                       onFocus={(e) => {
-                        e.target.style.borderColor = "rgba(99,102,241,0.5)";
-                        e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.08)";
+                        e.target.style.borderColor = "rgba(0,150,224,0.5)";
+                        e.target.style.boxShadow = "0 0 0 3px rgba(0,150,224,0.08)";
                       }}
                       onBlur={(e) => {
                         e.target.style.borderColor = "rgba(255,255,255,0.08)";
@@ -230,8 +226,8 @@ export default function Contact() {
                         border: "1px solid rgba(255,255,255,0.08)",
                       }}
                       onFocus={(e) => {
-                        e.target.style.borderColor = "rgba(99,102,241,0.5)";
-                        e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.08)";
+                        e.target.style.borderColor = "rgba(0,150,224,0.5)";
+                        e.target.style.boxShadow = "0 0 0 3px rgba(0,150,224,0.08)";
                       }}
                       onBlur={(e) => {
                         e.target.style.borderColor = "rgba(255,255,255,0.08)";
@@ -258,8 +254,8 @@ export default function Contact() {
                       border: "1px solid rgba(255,255,255,0.08)",
                     }}
                     onFocus={(e) => {
-                      e.target.style.borderColor = "rgba(99,102,241,0.5)";
-                      e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.08)";
+                      e.target.style.borderColor = "rgba(0,150,224,0.5)";
+                      e.target.style.boxShadow = "0 0 0 3px rgba(0,150,224,0.08)";
                     }}
                     onBlur={(e) => {
                       e.target.style.borderColor = "rgba(255,255,255,0.08)";
@@ -273,10 +269,10 @@ export default function Contact() {
                   disabled={sending}
                   className="w-full py-3.5 rounded-xl font-semibold text-white flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                   style={{
-                    background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-                    boxShadow: "0 0 30px rgba(99,102,241,0.35)",
+                    background: "linear-gradient(135deg, #0096E0, #ffcc00)",
+                    boxShadow: "0 0 30px rgba(0,150,224,0.35)",
                   }}
-                  whileHover={{ scale: 1.02, boxShadow: "0 0 40px rgba(99,102,241,0.5)" }}
+                  whileHover={{ scale: 1.02, boxShadow: "0 0 40px rgba(0,150,224,0.5)" }}
                   whileTap={{ scale: 0.98 }}
                 >
                   {sending ? (
@@ -300,7 +296,7 @@ export default function Contact() {
                   Or email directly:{" "}
                   <a
                     href="mailto:22521576@gm.uit.edu.vn"
-                    className="text-[#818cf8] hover:text-[#6366f1] transition-colors"
+                    className="text-[#ffcc00] hover:text-[#0096E0] transition-colors"
                   >
                     22521576@gm.uit.edu.vn
                   </a>

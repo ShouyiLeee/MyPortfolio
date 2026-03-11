@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg: #050510;
-  --color-surface: #0c0c1a;
-  --color-card: #11111e;
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-accent: #8b5cf6;
-  --color-cyan: #06b6d4;
+  --color-bg: #030308; /* Deep Space Black */
+  --color-surface: #0e1222;
+  --color-card: #141a33;
+  --color-primary: #0096E0; /* Doraemon Blue */
+  --color-primary-light: #4db8ff;
+  --color-accent: #ffcc00; /* Bell Yellow */
+  --color-cyan: #06b6d4; /* Neon Cyan for Tech */
   --color-green: #10b981;
   --color-orange: #f59e0b;
   --color-text: #f0f0f8;
@@ -29,20 +29,20 @@
   }
 
   body {
-    background-color: #050510;
+    background-color: #030308;
     color: #f0f0f8;
-    font-family: var(--font-outfit), 'Outfit', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5 {
-    font-family: var(--font-syne), 'Syne', system-ui, sans-serif;
+    font-family: var(--font-space), 'Space Grotesk', system-ui, sans-serif;
   }
 
   ::selection {
-    background-color: rgba(99, 102, 241, 0.35);
+    background-color: rgba(0, 150, 224, 0.35); /* Doraemon Blue */
     color: #fff;
   }
 
@@ -50,10 +50,10 @@
     width: 4px;
   }
   ::-webkit-scrollbar-track {
-    background: #050510;
+    background: #030308;
   }
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #6366f1, #8b5cf6);
+    background: linear-gradient(180deg, #0096E0, #ffcc00);
     border-radius: 2px;
   }
 }
@@ -104,7 +104,7 @@
 @layer utilities {
   /* Typography */
   .font-display {
-    font-family: var(--font-syne), 'Syne', system-ui, sans-serif;
+    font-family: var(--font-space), 'Space Grotesk', system-ui, sans-serif;
   }
 
   .font-mono-code {
@@ -113,14 +113,14 @@
 
   /* Gradients */
   .gradient-text {
-    background: linear-gradient(135deg, #818cf8 0%, #a78bfa 45%, #67e8f9 100%);
+    background: linear-gradient(135deg, #0096E0 0%, #4db8ff 45%, #06b6d4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-text-gold {
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    background: linear-gradient(135deg, #ffcc00 0%, #f59e0b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -290,7 +290,7 @@
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4, #6366f1);
+  background: linear-gradient(135deg, #0096E0, #ffcc00, #06b6d4, #0096E0);
   background-size: 300% 300%;
   animation: border-flow 4s ease infinite;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
