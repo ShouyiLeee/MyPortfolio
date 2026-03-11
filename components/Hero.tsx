@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { FiGithub, FiLinkedin, FiMail, FiArrowDown, FiChevronRight } from "react-icons/fi";
+import SolarSystem from "./SolarSystem";
 
 const ROLES = [
   "AI Engineer",
@@ -70,96 +71,8 @@ export default function Hero() {
       mouseRef.current = { x: e.clientX, y: e.clientY };
     };
     window.addEventListener("mousemove", onMouse);
-    type P = {
-      x: number; y: number; vx: number; vy: number;
-      size: number; opacity: number; color: string;
-      twinkleSpeed: number;
-      baseOpacity: number;
-    };
-    const COLS = ["#ffffff", "#0096E0", "#ffcc00", "#4db8ff", "#e0f2fe", "#ffffff", "#ffffff"];
-    const pts: P[] = Array.from({ length: 250 }, () => {
-      const isStar = Math.random() > 0.4;
-      return {
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * (isStar ? 0.05 : 0.2), // Stars move very slowly
-        vy: (Math.random() - 0.5) * (isStar ? 0.05 : 0.2),
-        size: isStar ? Math.random() * 1.5 + 0.1 : Math.random() * 2.2 + 0.5,
-        baseOpacity: Math.random() * 0.7 + 0.1,
-        opacity: Math.random() * 0.7 + 0.1,
-        color: COLS[Math.floor(Math.random() * COLS.length)],
-        twinkleSpeed: isStar ? Math.random() * 0.05 + 0.01 : 0, // Faster twinkle for stars
-      };
-    });
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const { x: mx, y: my } = mouseRef.current;
-
-      pts.forEach((a, i) => {
-        /* Mouse repulsion */
-        const dx = a.x - mx;
-        const dy = a.y - my;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 100) {
-          const force = (100 - dist) / 100;
-          a.vx += (dx / dist) * force * 0.08;
-          a.vy += (dy / dist) * force * 0.08;
-        }
-        /* Speed cap */
-        const speed = Math.hypot(a.vx, a.vy);
-        if (speed > 1.5) { a.vx *= 0.95; a.vy *= 0.95; }
-
-        /* Connections (Constellations) */
-        if (!a.twinkleSpeed) { // Only draw lines between moving dots, not background stars
-          pts.slice(i + 1).forEach((b) => {
-            if (b.twinkleSpeed) return;
-            const d = Math.hypot(a.x - b.x, a.y - b.y);
-            if (d < 100) {
-              ctx.beginPath();
-              ctx.strokeStyle = `rgba(0,150,224,${0.08 * (1 - d / 100)})`;
-              ctx.lineWidth = 0.5;
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              ctx.stroke();
-            }
-          });
-        }
-
-        // Twinkle effect for stars
-        if (a.twinkleSpeed) {
-          a.opacity += a.twinkleSpeed;
-          if (a.opacity >= Math.min(1, a.baseOpacity + 0.4) || a.opacity <= Math.max(0, a.baseOpacity - 0.4)) {
-            a.twinkleSpeed *= -1;
-          }
-        }
-
-        /* Dot with Glow */
-        ctx.beginPath();
-        ctx.arc(a.x, a.y, a.size, 0, Math.PI * 2);
-        const alpha = Math.max(0, Math.min(1, a.opacity)).toFixed(2);
-        ctx.fillStyle = a.color === "#ffffff" ? `rgba(255, 255, 255, ${alpha})` : 
-                        a.color === "#0096E0" ? `rgba(0, 150, 224, ${alpha})` :
-                        a.color === "#ffcc00" ? `rgba(255, 204, 0, ${alpha})` :
-                        a.color === "#4db8ff" ? `rgba(77, 184, 255, ${alpha})` :
-                        `rgba(224, 242, 254, ${alpha})`;
-        
-        ctx.shadowBlur = a.twinkleSpeed ? 8 : 4; // Glow effect
-        ctx.shadowColor = a.color;
-        ctx.fill();
-        ctx.shadowBlur = 0; // Reset shadow for next draws
-
-        a.x += a.vx;
-        a.y += a.vy;
-        if (a.x < 0 || a.x > canvas.width) a.vx *= -1;
-        if (a.y < 0 || a.y > canvas.height) a.vy *= -1;
-      });
-      animId = requestAnimationFrame(draw);
-    };
-    draw();
 
     return () => {
-      cancelAnimationFrame(animId);
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onMouse);
     };
@@ -167,12 +80,8 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden grid-pattern">
-      {/* Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 pointer-events-none"
-        style={{ zIndex: 0 }}
-      />
+      {/* 3D Solar System Background */}
+      <SolarSystem />
 
       {/* Background orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
